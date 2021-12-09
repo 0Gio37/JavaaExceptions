@@ -1,6 +1,7 @@
 package fr.exceptions;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Country {
@@ -17,6 +18,13 @@ public class Country {
     public void setName(String newName){
         this.name = newName;
     }
+
+    public static Comparator<Country> sortByName = new Comparator<Country>() {
+        @Override
+        public int compare(Country o1, Country o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    };
 
 
 

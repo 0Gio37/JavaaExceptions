@@ -1,7 +1,6 @@
 package fr.exceptions;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.Comparator;
 
 public class Launcher {
 
@@ -40,7 +39,13 @@ public class Launcher {
         System.out.println("Voici la liste modifiée :");
         Launcher.displayCountryList();
     }
-
+    public static void sortElement(){
+        Collections.sort(countryList, Country.sortByName);
+        System.out.println("Classement par order alphabétique :");
+        for (Country item : countryList){
+            System.out.println(" - "+item.getName());
+        }
+    }
 
 
 
@@ -59,13 +64,20 @@ public class Launcher {
         Launcher.addCountry(portugal);
         Launcher.addCountry(espagne);
         Launcher.addCountry(suisse);
+
+        Launcher.displayCountryList();
+        Launcher.sortElement();
+
+
+
 /*
         Launcher.displayCountryList();
         Launcher.removeAll();
         Launcher.displayCountryList();
+        Launcher.modifOneElement();
 
  */
 
-        Launcher.modifOneElement();
+
     }
 }
