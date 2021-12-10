@@ -26,6 +26,12 @@ public class Country {
         }
     };
 
+    public static Comparator<Country> sortByNameInversed = new Comparator<Country>() {
+        @Override
+        public int compare(Country o1, Country o2) {
+            return o2.getName().compareTo(o1.getName());
+        }
+    };
 
 
 }

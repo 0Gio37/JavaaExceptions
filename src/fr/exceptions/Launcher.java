@@ -1,6 +1,8 @@
 package fr.exceptions;
+import fr.exceptions.listException.AgeCapException;
+import fr.exceptions.listException.ListEmptyException;
+
 import java.util.*;
-import java.util.Comparator;
 
 public class Launcher {
 
@@ -9,9 +11,17 @@ public class Launcher {
     public static void addCountry(Country country){
         countryList.add(country);
     }
-    public static void displayCountryList(){
+    public static void displayCountryList() throws ListEmptyException {
+        /*
+        countryList.stream().forEach(new Consumer<Country>() {
+            @Override
+            public void accept(Country country) {
+                System.out.println(country.getName());
+            }
+        });
+         */
         if (countryList.isEmpty()){
-            System.out.println("Liste vide");
+            throw new ListEmptyException();
         }else{
             System.out.println("La collection contient "+countryList.size()+" pays");
             for (Country item : countryList){
@@ -24,7 +34,11 @@ public class Launcher {
     }
     public static void modifOneElement(){
         Scanner scanner = new Scanner(System.in);
-        Launcher.displayCountryList();
+        try {
+            Launcher.displayCountryList();
+        } catch (ListEmptyException e) {
+            e.printStackTrace();
+        }
         System.out.println("Quel pays voulez-vous modifier ?");
         String countrySelected = scanner.next();
         System.out.println("Tapez votre modification");
@@ -37,7 +51,11 @@ public class Launcher {
             }
         }
         System.out.println("Voici la liste modifiée :");
-        Launcher.displayCountryList();
+        try {
+            Launcher.displayCountryList();
+        } catch (ListEmptyException e) {
+            e.printStackTrace();
+        }
     }
     public static void sortElement(){
         Collections.sort(countryList, Country.sortByName);
@@ -47,17 +65,41 @@ public class Launcher {
         }
     }
 
+    public static void main(String[] args) throws AgeCapException {
+
+        //exo2 part2
+        //try {
+            ExoExecption.getAgeCap();
+        //} catch (AgeCapException e) {
+           // e.printStackTrace();}
 
 
 
-    public static void main(String[] args) {
+
+
+        //exo1 part 2
+        /*
+        try {
+            System.out.println(ExoExecption.divisionByZero(1,0));
+        } catch (DivisionZero e) {
+            System.out.println(e);
+        }finally {
+            try {
+                System.out.println("Il sera donc remplacé par 1 avec comme résultat "+ExoExecption.divisionByZero(1,1));
+            } catch (DivisionZero e) {
+                e.printStackTrace();
+            }
+        }
+        */
+
+        /*
+        //exos part 1
         Country france =  new Country("France");
         Country italie =  new Country("Italie");
         Country allemagne =  new Country("Allemagne");
         Country portugal =  new Country("Portugal");
         Country espagne =  new Country("Espagne");
         Country suisse =  new Country("Suisse");
-
         Launcher.addCountry(france);
         Launcher.addCountry(italie);
         Launcher.addCountry(allemagne);
@@ -65,19 +107,18 @@ public class Launcher {
         Launcher.addCountry(espagne);
         Launcher.addCountry(suisse);
 
-        Launcher.displayCountryList();
+
+        try {
+            Launcher.displayCountryList();
+        } catch (ListEmptyException e) {
+            e.printStackTrace();
+        }
         Launcher.sortElement();
-
-
-
-/*
         Launcher.displayCountryList();
         Launcher.removeAll();
         Launcher.displayCountryList();
         Launcher.modifOneElement();
 
  */
-
-
     }
 }
